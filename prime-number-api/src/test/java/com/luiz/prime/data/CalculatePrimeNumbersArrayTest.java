@@ -53,6 +53,22 @@ public class CalculatePrimeNumbersArrayTest {
     }
 
     @Test
+    @DisplayName("Should return the cut position when the value is not found - with one more")
+    void getPositionValueIsNotFoundWithOneMore() {
+        int expected = 2;
+        int position = sut.findIndex(4L, true);
+        Assertions.assertEquals(expected, position);
+    }
+    
+    @Test
+    @DisplayName("Should return the position value more one when the value is found - with one more")
+    void getPositionValueIsFoundWithOneMore() {
+        int expected = 2;
+        int position = sut.findIndex(3L, true);
+        Assertions.assertEquals(expected, position);
+    }
+
+    @Test
     @DisplayName("Should return the cut position when the value is not found")
     void getPositionValueIsNotFound() {
         int expected = 2;
@@ -89,5 +105,64 @@ public class CalculatePrimeNumbersArrayTest {
         sut.calculate(upper);
         Assertions.assertEquals(upper, ReflectionTestUtils.getField(sut, "upperCalculated"));
         Assertions.assertArrayEquals(oldList.toArray(), mockList.toArray());
+    }
+    @Test
+    @DisplayName("Should return the smallest prime number to the first prime number less than 8")
+    void smallestPrimeNumberToTheLessThan8() {
+        Long lower = 1L;
+        Long upper = 8L;
+        List<Long> expected = List.of(2L, 3L, 5L, 7L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+
+    @Test
+    @DisplayName("Should return a prime number between two non-prime numbers")
+    void aPrimeBetweenTwoNonPrimeNumbers() {
+        Long lower = 16L;
+        Long upper = 18L;
+        List<Long> expected = List.of(17L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+
+    @Test
+    @DisplayName("should only return a prime number that is equal to the upper range")
+    void aPrimeAndEqualUpper() {
+        Long lower = 16L;
+        Long upper = 17L;
+        List<Long> expected = List.of(17L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+    
+    @Test
+    @DisplayName("should only return a prime number that is equal to the lower range")
+    void aPrimeAndEqualLower() {
+        Long lower = 17L;
+        Long upper = 18L;
+        List<Long> expected = List.of(17L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+
+    @Test
+    @DisplayName("Should work with a lower range less than zero")
+    void lowerRangeLessThanZero() {
+        Long lower = -20L;
+        Long upper = 3L;
+        List<Long> expected = List.of(2L, 3L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
+
+    @Test
+    @DisplayName("An empty list must be returned if the upper range is less than the smallest prime number")
+    void upperRangeIsLessThanTheSmallestPrime() {
+        Long lower = -20L;
+        Long upper = -2L;
+        List<Long> expected = List.of();
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
     }
 }
