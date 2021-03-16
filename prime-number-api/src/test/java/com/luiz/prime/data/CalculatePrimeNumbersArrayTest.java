@@ -145,6 +145,16 @@ public class CalculatePrimeNumbersArrayTest {
         List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
         Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
     }
+    
+    @Test
+    @DisplayName("should return a prime number when the two numbers are equal and are also a prime number")
+    void aPrimeEqualLowerAndUpper() {
+        Long lower = 17L;
+        Long upper = 17L;
+        List<Long> expected = List.of(17L);
+        List<Long> actual = sut.getPrimeNumbersWithinTheRange(lower, upper);
+        Assertions.assertArrayEquals(expected.toArray(), actual.toArray());
+    }
 
     @Test
     @DisplayName("Should work with a lower range less than zero")

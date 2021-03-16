@@ -4,7 +4,7 @@ import static org.mockito.ArgumentMatchers.eq;
 
 import java.util.List;
 
-import com.luiz.prime.domain.SearchForPrimeNumbersInTheRange;
+import com.luiz.prime.domain.CalculatePrimeNumbers;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,25 +23,23 @@ class PrimeNumberControllerTest {
     private PrimeNumberController sut;
 
     @Mock
-    private SearchForPrimeNumbersInTheRangeStub service;
+    private CalculatePrimeNumbersStub service;
 
     @Service
-    public class SearchForPrimeNumbersInTheRangeStub implements SearchForPrimeNumbersInTheRange {
-
-        @Override
-        public List<Long> getPrimeNumberList(Long lower, Long upper) {
+    public class CalculatePrimeNumbersStub implements CalculatePrimeNumbers {
+        public List<Long> getPrimeNumbers(Long lower, Long upper) {
             return List.of(2L, 3L, 5L, 7L, 11L, 13L, 17L);
         }
-
     }
 
     @Test
-    @DisplayName("Should call the service passing the parameters in the correct order")
-    void callServiceCorrectly() {
-        Long lower = 1L;
-        Long upper = 10L;
+    @DisplayName("Should call the service.calculate passing the parameters correctly")
+    void callServiceGetPrimeNumbersCorrectly() {
+        Long value1 = 1L;
+        Long value2 = 10L;
 
-        sut.getPrimeNumberList(upper, lower);
-        BDDMockito.verify(service).getPrimeNumberList(eq(lower), eq(upper));
+        sut.getPrimeNumberList(value1, value2);
+        BDDMockito.verify(service).getPrimeNumbers(eq(value1), eq(value2));
     }
+
 }

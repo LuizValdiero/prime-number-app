@@ -6,22 +6,36 @@ import java.util.List;
 
 import com.luiz.prime.domain.CalculatePrimeNumbers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
+@Service
 @AllArgsConstructor
 public class CalculatePrimeNumbersArray implements CalculatePrimeNumbers {
-    @Autowired
+    
     private ArrayList<Long> primeNumberList;
     private Long upperCalculated;
-
+    
     public CalculatePrimeNumbersArray() {
         this.primeNumberList = new ArrayList<>();
         this.primeNumberList.add(2L);
         this.upperCalculated = 2L;
     }
-    
+
+    public List<Long> getPrimeNumbers(Long value1, Long value2) {
+        long lower, upper;
+        if(value1 <= value2) {
+            lower = value1;
+            upper = value2;
+        } else {
+            lower = value2;
+            upper = value1;
+        }
+        calculate(upper);
+        return getPrimeNumbersWithinTheRange(lower, upper);
+    }
+
     public void calculate(Long upper) {
         if(upper <= this.upperCalculated)
             return;
