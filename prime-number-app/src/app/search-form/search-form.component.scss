@@ -1,0 +1,54 @@
+div.container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  form {
+    display: grid;
+    gap: 10px;
+    grid-template: 'values-field send-button' 50px
+      'result-list result-list' auto / 200px 100px;
+    margin: 20px 0 30px 0;
+    .p-inputtext.values-field {
+      grid-area: values-field
+    }
+    .p-button.send-button {
+      grid-area: send-button
+    }
+
+    .p-inputtextarea.result-list {
+      grid-area: result-list;
+      overflow-y: auto !important;
+      height: 100px !important;
+      opacity: 1;
+    }
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  a.my-link {
+    display: inline;
+    width: 100%;
+    text-align: right;
+  }
+
+}
+
+
+@media screen and (max-width: 767px) {}
+
+@media screen and (max-width: 426px) {
+  div.container {
+    form {
+      grid-template:
+        'values-field' 50px
+        'send-button' 50px
+        'result-list' auto
+        / 200px;
+
+    }
+  }
+}

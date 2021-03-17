@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PrimeNumberApiApplication<prime-number-api>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.luiz.prime.PrimeNumberApiApplication",
+            "projectName": "prime-number-api",
+            "args": ""
+        }
+    ]
+}
